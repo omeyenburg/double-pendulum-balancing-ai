@@ -1,18 +1,21 @@
 # Pendulum Balancing AI
 
-This Python program simulates a pendulum on a cart that can move within the range of -1 ≤ x ≤ 1. An AI, trained using reinforcement learning, balances the pendulum upside down.
+This Python program simulates a double pendulum on a cart that can move within the range of -1 ≤ x ≤ 1. An AI, trained using reinforcement learning, balances the pendulum upside down.
 
 AI inputs:
 
 - horizontal position of the cart
 - horizontal velocity of the cart
-- horizontal position of the bob
-- vertical position of the bob
-- angular velocity of the bob
+- horizontal position of the first bob
+- vertical position of the first bob
+- angular velocity of the first bob
+- horizontal position of the second bob
+- vertical position of the second bob
+- angular velocity of the second bob
 
 AI output:
 
-- horizontal acceleration
+- horizontal acceleration for the cart
 
 ## Dependencies
 
@@ -78,32 +81,12 @@ Train the AI:
 
 ## Generations
 
-The training process has saved the state of each generation in the `src/gen/` directory. Early generations, up until generation 12157, were trained with progressively increased gravity to help the AI gradually adapt to the final gravity value of 9.81 m/s². Similarly the damping values for horizontal and angular movement were reduced.
+The training process has saved the state of each generation in the `src/gen/` directory.
 
-One of the best-performing generations is generation 12170. To run the simulation using this generation's parameters, execute the following command:
-`python3 src/render_ai.py --gen 12170`
+## Todo
 
-### Gravity and damping values
-
-- Generation 1388
-
-  > ```
-  > angular_damping = 0.7
-  > horizontal_damping = 0.48
-  > gravity = 0.65
-  > ```
-
-- Generations 2157 to 12157:
-
-  > ```
-  > angular_damping = 0.64624 + (0.1 - 0.64624) * (generation - 2157) / 10000
-  > horizontal_damping = 0.463872 + (0.3 - 0.463872) * (generation - 2157) / 10000
-  > gravity = 1.470736 + (9.81 - 1.470736) * (generation - 2157) / 10000
-  > ```
-
-- Generations past 12157:
-  > ```
-  > angular_damping = 0.1
-  > horizontal_damping = 0.3
-  > gravity = 9.81
-  > ```
+- save the parameters for every generation
+- save the score function for every generation
+- add external options file to replace command line arguments
+- fix physics or create more readable & understandable equation
+- documentation
